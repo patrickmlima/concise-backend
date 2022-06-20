@@ -1,0 +1,24 @@
+openapi: 3.0.0
+info:
+  title: Concise API
+  description: Main API for Concise application
+  version: 1.0.0
+servers:
+  - url: http://HOST_IP:HOST_PORT
+    description: Service API URI
+
+paths:
+  /:
+    get:
+      summary: Default URL indicating that server is up
+      responses:
+        '200':
+          description: Response from server
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Message from server
