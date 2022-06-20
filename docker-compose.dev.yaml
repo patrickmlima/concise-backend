@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  concise-backend:
+    build:
+      context: './'
+      args:
+        NODE_ENV: development
+    env_file:
+      '.env'
+    image: concise-backend:lastest
+    command: ["node", "src/index.js", "--inspect"]
+    ports:
+      - 3000:3000
+    networks:
+      - data_network
+    depends_on:
+      - database
+    environment:
+      DEV_DATABASE_HOST: database
+      DEV_DATABASE_PORT: 3386
+      DEV_DATABASE_USER_PASSWORD_FILE: /run/secrets/backend_user_pwd
+
+  database:
+    container_name: concise-db
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3386:3306
+    volumes:
+      - concise_db_volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/database_root_pwd
+      MYSQL_DATABASE: concise-main
+      MYSQL_USER: backend_user
+      MYSQL_PASSWORD_FILE: /run/secrets/backend_user_pwd
+    secrets:
+      - database_root_pwd
+      - backend_user_pwd
+    networks:
+      - data_network
+      - adminer_network
+
+  adminer:
+    image: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: database
+    ports:
+      - 127.0.0.1:3387:8080
+    networks:
+      - adminer_network
+
+volumes:
+  concise_db_volume:
+
+secrets:
+  database_root_pwd:
+    file: './secrets/database_root_pwd.txt'
+  backend_user_pwd:
+    file: './secrets/database_backend_user_pwd.txt'
+
+networks:
+  data_network:
+  adminer_network:
