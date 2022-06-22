@@ -3,29 +3,20 @@ const dotenv = require('dotenv');
 
 const dotenvPath = path.join(process.cwd(), '.env');
 
-dotenv.config({ path:  dotenvPath });
+dotenv.config({ path: dotenvPath });
 
-const development = {
-    app: {
-        port: process.env.DEV_PORT || '',
-        ip: process.env.DEV_HOST_IP || ''
-    }
-}
+const variables = {
+  app: {
+    host: process.env?.SERVER_IP,
+    port: process.env?.SERVER_PORT,
+  },
+  database: {
+    host: process.env?.DB_HOST,
+    port: process.env?.DB_PORT,
+    name: process.env?.DB_NAME,
+    username: process.env?.DB_USER_NAME,
+    password: process.env?.DB_USER_PASSWORD,
+  },
+};
 
-const production = {
-    app: {
-        port: process.env.PORT || '',
-        ip: process.env.HOST_IP || ''
-    }
-}
-
-const selectEnv = () => {
-    const envValue = process.env.NODE_ENV || 'development';
-
-    if (envValue === 'production') {
-        return production;
-    }
-    return development;
-}
-
-module.exports = selectEnv();
+module.exports = { ...variables };

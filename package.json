@@ -5,8 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jasmine --config=jasmine.json",
-    "start": "nodemon src/index.js",
-    "start:stack": "docker compose -f docker-compose.dev.yaml -p concise-backend up --build"
+    "start:dev": "nodemon --trace-warnings --inspect=0.0.0.0:9229 src/index.js"
   },
   "repository": {
     "type": "git",

@@ -8,7 +8,9 @@ const app = express();
 initLoaders(app);
 
 app.listen(config.app.port, () => {
-    console.log(`Server is up on port ${config.app.port}`);
+  console.log(`Server is up on port ${config.app.port}`);
 });
+
+console.log('ksdjfksdjfk');
 
 module.exports = app;
