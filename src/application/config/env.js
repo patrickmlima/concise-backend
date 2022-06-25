@@ -6,6 +6,7 @@ const dotenvPath = path.join(process.cwd(), '.env');
 dotenv.config({ path: dotenvPath });
 
 const variables = {
+  nodeEnv: process.env?.NODE_ENV || 'development',
   app: {
     host: process.env?.SERVER_IP,
     port: process.env?.SERVER_PORT,
@@ -19,4 +20,4 @@ const variables = {
   },
 };
 
-module.exports = { ...variables };
+module.exports = { environment: { ...variables } };

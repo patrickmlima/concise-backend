@@ -13,7 +13,7 @@ services:
       - database
     environment:
       DB_HOST: database
-      DB_PORT: 3386
+      DB_PORT: 3306
       DB_USER_PASSWORD_FILE: /run/secrets/backend_user_pwd
     command: ['/usr/local/bin/server-statup.sh', 'start:dev']
     ports:

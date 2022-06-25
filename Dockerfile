@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node
 
 LABEL maintaner="Patrick Lima <patrickm.lima1@gmail.com"
 
