@@ -1,0 +1,3 @@
+exports.Errors = {
+  NON_IMPLEMENTED_ERROR: 'NON_IMPLEMENTED_ERROR',
+};

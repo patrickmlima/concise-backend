@@ -9,17 +9,19 @@ services:
     env_file:
       '.env'
     image: concise-backend:lastest
-    command: ["node", "src/index.js", "--inspect"]
+    depends_on:
+      - database
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_USER_PASSWORD_FILE: /run/secrets/backend_user_pwd
+    command: ['/usr/local/bin/server-statup.sh', 'start:dev']
     ports:
       - 3000:3000
     networks:
       - data_network
-    depends_on:
-      - database
-    environment:
-      DEV_DATABASE_HOST: database
-      DEV_DATABASE_PORT: 3386
-      DEV_DATABASE_USER_PASSWORD_FILE: /run/secrets/backend_user_pwd
+    secrets:
+      - backend_user_pwd
 
   database:
     container_name: concise-db
