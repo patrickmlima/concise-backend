@@ -1,24 +1,25 @@
-const {
-  NonImplementedError,
-} = require('../../exceptions/non-implemented-error');
+const { NonImplementedError } = require('../exceptions/non-implemented-error');
 
 function EntityRepository() {
-  this.findOne = (queryOptions) => {
+  this.findOne = (pk, queryOptions) => {
     throw new NonImplementedError();
   };
-  this.findAll = (queryOptions) => {
+  this.findMany = (queryOptions) => {
     throw new NonImplementedError();
   };
   this.create = (data, pk) => {
     throw new NonImplementedError();
   };
-  this.updateOne = (pk, dataUpdate, queryOptions) => {
+  this.updateOne = (dataUpdate, pk, queryOptions) => {
     throw new NonImplementedError();
   };
-  this.updateAll = (dataUpdate, queryOptions) => {
+  this.updateMany = (dataUpdate, queryOptions) => {
     throw new NonImplementedError();
   };
   this.deleteOne = (pk) => {
+    throw new NonImplementedError();
+  };
+  this.deleteMany = (queryOptions) => {
     throw new NonImplementedError();
   };
 }
