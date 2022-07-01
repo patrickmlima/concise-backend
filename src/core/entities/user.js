@@ -1,4 +1,4 @@
-const User = function (
+const User = function ({
   id,
   firstName,
   lastName,
@@ -6,8 +6,8 @@ const User = function (
   birthDate,
   createdAt,
   updatedAt,
-  password
-) {
+  password,
+}) {
   this.id = id;
   this.firstName = firstName;
   this.lastName = lastName;
