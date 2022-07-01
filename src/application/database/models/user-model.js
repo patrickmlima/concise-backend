@@ -32,6 +32,7 @@ const user = sequelize.define(
     },
   },
   {
+    modelName: 'User',
     tableName: 'Users',
   },
 );

@@ -2,10 +2,10 @@
   "name": "concise-backend",
   "version": "1.0.0",
   "description": "Main API for Concise application",
-  "main": "src/index.js",
+  "main": "src/application/index.js",
   "scripts": {
-    "test": "jasmine --config=jasmine.json",
-    "start:dev": "nodemon --trace-warnings --inspect=0.0.0.0:9229 src/index.js"
+    "test": "NODE_ENV=test jasmine --config=jasmine.json",
+    "start:dev": "nodemon --trace-warnings --inspect=0.0.0.0:9229 src/application/index.js"
   },
   "repository": {
     "type": "git",
@@ -28,9 +28,11 @@
     "express": "^4.17.1",
     "mysql2": "^2.3.3",
     "sequelize": "^6.21.0",
+    "sinon": "^14.0.0",
     "swagger-ui-express": "^4.4.0",
     "winston": "^3.8.0",
-    "yamljs": "^0.3.0"
+    "yamljs": "^0.3.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "jasmine": "^3.7.0",

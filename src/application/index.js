@@ -1,7 +1,7 @@
 const express = require('express');
 
-const { environment } = require('./application/config/env');
-const initLoaders = require('./application/loaders/index');
+const { environment } = require('./config/env');
+const initLoaders = require('./loaders/index');
 
 const app = express();
 
