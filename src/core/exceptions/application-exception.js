@@ -1,7 +1,12 @@
 function ApplicationException(message, status) {
-  Error.call(this, message);
-
-  this.status = status;
+  return {
+    get message() {
+      return message;
+    },
+    get status() {
+      return status;
+    },
+  };
 }
 
 ApplicationException.prototype = Object.create(Error.prototype);
