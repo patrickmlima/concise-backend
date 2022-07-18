@@ -30,11 +30,22 @@ const user = sequelize.define(
       type: DataTypes.DATEONLY,
       allowNull: false,
     },
+    password: {
+      type: DataTypes.STRING(60).BINARY,
+      allowNull: false,
+      set(value) {
+        this.setDataValue('password', HashService.hashString(value));
+      },
+    },
   },
   {
     modelName: 'User',
     tableName: 'Users',
   },
 );
+
+user.addHook('beforeCreate', 'id', (userEntry, options) => {
+  user.id = uuid.v4();
+});
 
 module.exports = { User: user };
