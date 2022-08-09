@@ -1,7 +1,7 @@
-const app = require('../src/index');
+const app = require('../src/application/index');
 
-describe("Server instance", function() {
-    it("Should have application server instance", function() {
-        expect(app).toBeTruthy();
-    });
+describe('Server instance', function () {
+  it('Should have application server instance', function () {
+    expect(app).toBeTruthy();
   });
+});

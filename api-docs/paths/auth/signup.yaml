@@ -1,0 +1,29 @@
+post:
+  summary: Creates a new user on system
+  tags:
+    - Auth
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../schemas/_index.yaml#/SignupReq'
+  responses:
+    '201':
+      description: User was successfully created
+      content:
+        application/json:
+          schema:
+            $ref: '../../responses/_index.yaml#/APIResponse'
+    '422':
+      description: 'Validation errr on sent data'
+      content:
+        application/json:
+          schema:
+            $ref: '../../responses/_index.yaml#/APIResponse'
+    '500':
+      description: 'Server error'
+      content:
+        application/json:
+          schema:
+            $ref: '../../responses/_index.yaml#/APIResponse'
+

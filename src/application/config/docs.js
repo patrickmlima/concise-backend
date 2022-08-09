@@ -1,16 +1,40 @@
 const path = require('path');
 const YAML = require('yamljs');
+const { resolveRefs } = require('json-refs');
 
 const { environment } = require('./env');
 
-const docIndexFile = path.resolve(process.cwd(), 'api-docs', 'index.yaml');
-console.log(`doc index file path: ${docIndexFile}`);
+const readSwaggerFileAndLoadRefs = (mainYamlFileLocation) => {
+  const mainYamlFileContent = YAML.load(mainYamlFileLocation);
+  const options = {
+    location: mainYamlFileLocation,
+    loaderOptions: {
+      processContent: (res, callback) => {
+        callback(undefined, YAML.parse(res.text));
+      },
+    },
+  };
 
-const docsFile = YAML.load(docIndexFile);
+  return resolveRefs(mainYamlFileContent, options).then(
+    (results) => results.resolved,
+    (err) => {
+      logger.error(err.stack);
+    },
+  );
+};
 
-let serverUrl = docsFile.servers[0].url.replace('HOST_IP', environment.app.ip);
-serverUrl = serverUrl.replace('HOST_PORT', environment.app.port);
+module.exports = {
+  loadAPIDocs: async () => {
+    const docIndexFile = path.resolve(process.cwd(), 'api-docs', 'index.yaml');
+    console.log(`doc index file path: ${docIndexFile}`);
 
-docsFile.servers[0].url = serverUrl;
+    const docsFile = await readSwaggerFileAndLoadRefs(docIndexFile);
 
-module.exports = docsFile;
+    const serverUrl = docsFile.servers[0].url
+      .replace('HOST_IP', environment.app.host)
+      .replace('HOST_PORT', environment.app.port);
+
+    docsFile.servers[0].url = serverUrl;
+    return docsFile;
+  },
+};

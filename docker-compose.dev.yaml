@@ -6,8 +6,7 @@ services:
       context: './'
       args:
         NODE_ENV: development
-    env_file:
-      '.env'
+    env_file: '.env'
     image: concise-backend:lastest
     depends_on:
       - database
@@ -15,7 +14,7 @@ services:
       DB_HOST: database
       DB_PORT: 3306
       DB_USER_PASSWORD_FILE: /run/secrets/backend_user_pwd
-    command: ['/usr/local/bin/server-statup.sh', 'start:dev']
+    command: [ '/usr/local/bin/server-statup.sh', 'start:dev' ]
     ports:
       - 3000:3000
     networks:
@@ -54,6 +53,7 @@ services:
 
 volumes:
   concise_db_volume:
+
 
 secrets:
   database_root_pwd:

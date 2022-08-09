@@ -17,6 +17,9 @@ module.exports = {
           port: environment.database.port,
           dialect: 'mysql',
           logging: logger.debug.bind(logger),
+          define: {
+            noPrimaryKey: true,
+          },
         }
       );
     }

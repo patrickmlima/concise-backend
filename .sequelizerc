@@ -1,0 +1,9 @@
+const { resolve } = require('path');
+const { environment } = require('./src/application/config/env');
+
+const { username, password, host, port, name } = environment.database;
+module.exports = {
+  'migrations-path': resolve('migrations'),
+  'models-path': resolve('src', 'application', 'database', 'models'),
+  url: `mysql://${username}:${password}@${host}:${port}/${name}`,
+};

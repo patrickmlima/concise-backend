@@ -1,12 +1,15 @@
-const { Errors } = require('../constants');
+const { commonHTTPStatus } = require('../constants');
+const { ApplicationException } = require('./application-exception');
 
 function NonImplementedError() {
-  Error.call(this);
-  this.name = Errors.NON_IMPLEMENTED_ERROR;
-  this.message = 'Method not implemented';
+  ApplicationException.call(
+    this,
+    'Method not implemented',
+    commonHTTPStatus.SERVER_ERROR
+  );
 }
 
-NonImplementedError.prototype = new Error();
+NonImplementedError.prototype = Object.create(ApplicationException.prototype);
 NonImplementedError.prototype.constructor = NonImplementedError;
 
 module.exports = {

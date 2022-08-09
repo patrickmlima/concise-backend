@@ -1,11 +1,16 @@
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 
-const docsAsObject = require('../../config/docs');
+const apiDocsReader = require('../../config/docs');
 
 const router = express.Router();
 
-router.use('/', swaggerUi.serve);
-router.get('/', swaggerUi.setup(docsAsObject));
+apiDocsReader
+  .loadAPIDocs()
+  .then((docs) => {
+    router.use('/', swaggerUi.serve);
+    router.get('/', swaggerUi.setup(docs));
+  })
+  .catch((err) => console.error(err));
 
 module.exports = router;
