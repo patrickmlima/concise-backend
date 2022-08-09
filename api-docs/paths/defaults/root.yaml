@@ -1,0 +1,13 @@
+get:
+  summary: Default URL indicating that server is up
+  responses:
+    '200':
+      description: Response from server
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Message from server
